@@ -23,7 +23,7 @@ Email me (tykowale@gmail.com) with any questions!
 Before running this make sure to have Node > 6.x installed.
 
 To run locally first clone the repository then change into the directory.
-Go to http://openweathermap.org/ and sign up for a api. Once you have that put it in the
+Go to http://openweathermap.org/ and sign up for an api key. Once you have that put it in the
 `secrets.json` file where it says "PUT_API_KEY_HERE". After that run the following commands.
 ```
 npm install
