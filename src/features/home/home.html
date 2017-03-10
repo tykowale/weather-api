@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Ty's Weather Service</a>
+        </div>
+        <form ng-submit="home.searchZip()" class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="home.searchText" placeholder="Enter Zip Code...">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" uib-dropdown is-open="home.isOpen">
+                <a href="#" uib-dropdown-toggle class="dropdown-toggle" role="button">Units: {{home.currentUnit}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="home.setUnits('Imperial')">Imperial (&deg;F)</a></li>
+                    <li><a ng-click="home.setUnits('Metric')">Metric (&deg;C)</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if="!!home.currentWeather">
+
+        <div ng-if="home.error" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <span class="sr-only">Error:</span> Enter a valid zipcode
+        </div>
+
+        <h4 class="text-center"> 6 Day Weather Forecast for {{home.city.name}} </h4>
+        <current-weather wind-unit="home.currentUnit === 'Imperial' ? 'mph' : 'm/s'" weather="home.currentWeather"></current-weather>
+        <div class="container">
+            <div ng-repeat="dayWeather in home.weatherList">
+                <weather-panel weather="dayWeather"></weather-panel>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="!home.currentWeather">
+        <h4 class="text-center"> Fetching Current Location</h4>
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+</div>
